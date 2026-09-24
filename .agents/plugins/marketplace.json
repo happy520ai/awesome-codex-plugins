@@ -790,6 +790,20 @@
       "icon": "./plugins/Pythoughts-labs/designer-skill/assets/icon.webp"
     },
     {
+      "name": "devin",
+      "displayName": "Devin Plugin CC",
+      "source": {
+        "source": "local",
+        "path": "./plugins/TheOnlyFusionCube/devin-plugin-cc"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development & Workflow",
+      "description": "Devin AI code reviews, delegated tasks, Fusion lead/sidekick workflows, and cloud handoffs to app.devin.ai for Codex, Claude Code, and other coding agents."
+    },
+    {
       "name": "dev-skills",
       "displayName": "Dev Skills",
       "source": {

@@ -1,6 +1,6 @@
 ---
 name: codex-reset
-description: Answer questions about OpenAI Codex usage-limit resets and Codex outages with the Codex Reset MCP tools (reset forecast, verified reset record, service status). Use when the user asks whether or when Codex limits reset, why Codex stopped working, or whether to wait for a reset.
+description: Answer questions about OpenAI Codex usage-limit resets and Codex outages with the Codex Reset MCP tools or its public JSON API (reset forecast, verified reset record, service status). Use when the user asks whether or when Codex limits reset, why Codex stopped working, or whether to wait for a reset.
 ---
 
 # Codex Reset
@@ -12,6 +12,18 @@ Use the `codex-reset` MCP server tools. They are read-only and need no arguments
 | "Will Codex reset soon?", "Should I wait?" | `get_reset_forecast` |
 | "When was the last reset?", "List resets in August" | `get_reset_timeline` (`group`, `from`, `to`, `limit`) |
 | "Is Codex down or am I rate-limited?" | `get_codex_status` |
+
+## Without the MCP server
+
+If the `codex-reset` tools are not available, read the same data from the public JSON API (free, no key). Send a `User-Agent` that names your client:
+
+| Tool | HTTP equivalent |
+| --- | --- |
+| `get_reset_forecast` | `GET https://codex-reset.com/api/forecast` |
+| `get_reset_timeline` | `GET https://codex-reset.com/api/timeline?group=reset` |
+| `get_codex_status` | `GET https://codex-reset.com/api/status` |
+
+Field reference: https://codex-reset.com/developers
 
 ## How to answer
 
