@@ -44,6 +44,8 @@ npx skills add danjdewhurst/story-skills   # or: bunx skills add danjdewhurst/st
 
 Then ask your agent to **"Start a new story"**. Per-agent instructions for GitHub Copilot, Cursor, Windsurf, Gemini CLI, OpenCode, and others are under [More install options](#more-install-options).
 
+New to Story Skills? [Getting started](docs/getting-started.md) walks through a first session, and the [documentation index](docs/README.md) links every guide and reference page.
+
 ### Or let your agent install it
 
 Paste this prompt into your coding agent. It works out which agent it is and uses the matching install method:
@@ -153,7 +155,7 @@ The CLI is for maintenance only. Agents write story content directly to markdown
 |---------|---------|
 | `story validate [path]` | Check required files, schema version, YAML frontmatter, registries, and word-count warnings |
 | `story links [path]` | Check character, location, chapter, and arc cross-references and backlinks |
-| `story continuity [path]` | Check deterministic continuity contracts: deaths, promises and payoffs, questions, casts, and durable state |
+| `story continuity [path]` | Check deterministic continuity contracts: deaths, promises and payoffs, questions, casts, durable state, and travel times along location routes |
 | `story series [path]` | Order linked sequels and prequels by chronology and check shared canon: deaths, casts, knowledge fact ids, names, and destroyed artifacts |
 | `story reindex [path]` | Rebuild registry tables from the current markdown files |
 | `story wordcount [path] --write` | Count chapter prose and update chapter frontmatter plus the chapter registry |
@@ -169,7 +171,7 @@ The CLI is for maintenance only. Agents write story content directly to markdown
 | `story knowledge sera-voss --at chapter-03` | Show what a character knew at a chapter, from timeline-scoped knowledge state |
 | `story timeline [path]` | Show scenes in story-time order from their `date`/`time` (marking scenes told out of order), POV balance by words, and each character's presence and longest absence |
 | `story prose [path]` | Lint chapter prose: filter words, -ly adverbs, said-bookisms, echoes, sentence rhythm, repeated phrases, similar names, and `style-sheet.md` spellings and watch words |
-| `story voices [path]` | Fingerprint each character's attributed dialogue (named speech tags and single-name action beats; pronoun tags are not counted) (sentence length, contractions, questions, signature words) and flag `voice-avoid` words and characters who sound alike |
+| `story voices [path]` | Fingerprint each character's attributed dialogue (sentence length, contractions, questions, signature words) and flag `voice-avoid` words and characters who sound alike. Only named speech tags and single-name action beats count; pronoun tags do not |
 | `story pacing [path]` | Tabulate scenes, sequels, scene outcomes (`yes`, `no`, `yes-but`, `no-and`), and chapter hooks; flag runs of easy wins, missing sequels, flat chapter endings, and length outliers |
 | `story clues [path]` | Draw the fair-play grid of clue plants and reveals by chapter; flag late plants, unplanted reveals, and red herrings never debunked |
 | `story diagram relationships --path .` | Print Mermaid source for the family tree and relationships, the location route map, the story-time timeline, the clue flow, or arcs by chapter |
@@ -181,7 +183,7 @@ The CLI is for maintenance only. Agents write story content directly to markdown
 | Command | Purpose |
 |---------|---------|
 | `story synopsis [--pages 1\|3] [--out file]` | Compress arcs into a mechanical 1- or 3-page synopsis |
-| `story export [path] --out manuscript.md` | Combine front matter, chapters, and back matter into a single manuscript markdown file |
+| `story export [path] --out dist/manuscript.md` | Combine front matter, chapters, and back matter into a single manuscript markdown file |
 | `story build [path] --format epub` | Build disposable markdown, EPUB, DOCX, or Shunn manuscript artifacts in `dist/`; EPUB builds embed the `story.md` `cover` image, publishing metadata, and accessibility metadata |
 | `story build [path] --format html` | Build a single-file review copy whose paragraphs carry citable anchors such as `ch03-p12` |
 | `story build [path] --format print --trim 6x9` | Build a print-ready paged-media HTML interior (author and chapter-title running heads, foot page numbers, raised chapter initials) to render to PDF with Paged.js, WeasyPrint, or Prince |
@@ -193,9 +195,9 @@ Behavior notes:
 - **Matter pages** from `matter/` appear in the export and in every build format except Shunn, which is a submission format.
 - **EPUB and DOCX** builds target plain prose: `*italic*` and `**bold**` become italic and bold runs, scene-break lines (`***`, `---`) become a `* * *` separator, and other markdown structure such as blockquotes, lists, and tables is flattened to text. The markdown export keeps chapter text as-is.
 - **`story rename` and `story remove`** update entity ids in frontmatter reference fields and markdown link targets. They never edit prose, so a character called "Port" can be renamed without touching the word "port" in chapter text.
-- A command that changes a frontmatter value regenerates that file's **frontmatter** from the parsed values, which drops any YAML comments in it. Files whose values don't change are left untouched.
+- A command that changes a frontmatter value rewrites only the entries that changed. Comment lines, unchanged entries, and the body keep their exact text, and files whose values don't change are left untouched.
 
-For a complete starter transcript, read [`docs/first-20-minutes.md`](docs/first-20-minutes.md). For the project contract, read [`docs/schema-v2.md`](docs/schema-v2.md) and [`schemas/story.schema.json`](schemas/story.schema.json).
+Every command and option is in the [CLI reference](docs/cli-reference.md). For a complete first session, read [Getting started](docs/getting-started.md). For the project contract, read the [Project format reference](docs/project-format.md) and [`schemas/story.schema.json`](schemas/story.schema.json).
 
 ## Write a book with pull requests
 
@@ -288,7 +290,7 @@ Examples in this repository:
 - [`examples/the-last-ember/`](examples/the-last-ember/): a fantasy with three characters, two locations, a magic system, a plot arc with foreshadowing, and a drafted first chapter.
 - [`examples/the-fall-of-the-citadel/`](examples/the-fall-of-the-citadel/): a prequel to The Last Ember, linked with `series`, `book-number`, and `precedes`, that shares characters and places with the first book. Run `story series examples/the-last-ember` to see the chronology.
 - [`examples/harbor-of-second-light/`](examples/harbor-of-second-light/): a near-future coastal mystery with memory technology, a posthumous witness arc, populated continuity state, and a drafted first chapter.
-- [`examples/the-unraveled-thread/`](examples/the-unraveled-thread/): a deliberately broken project that demonstrates every class of finding the continuity engine reports.
+- [`examples/the-unraveled-thread/`](examples/the-unraveled-thread/): a deliberately broken project that demonstrates the main kinds of finding the continuity engine reports.
 
 ## More install options
 
@@ -421,7 +423,7 @@ Outside coding agents:
 
 ## Development and releasing
 
-Development uses Bun:
+The [Development guide](docs/development.md) covers the repository layout, CLI architecture, tests, and release process in full. Development uses Bun:
 
 ```shell
 bun install
@@ -449,7 +451,7 @@ node evals/run-skill.js  # full model run (needs Claude Code credentials)
 
 Every published change needs a new version in `package.json`, `.codex-plugin/plugin.json` (Codex's version source), `.claude-plugin/plugin.json` (Claude Code's), and `src/version.js` (printed by `story --version`), so installed users receive updates. Marketplace entries stay unversioned to avoid duplicate version state.
 
-Don't bump these by hand. The release script bumps all four, rebuilds the fallback, runs the CI checks, commits `chore: release X.Y.Z`, tags `vX.Y.Z`, pushes, and creates a GitHub release with generated notes. The tag push runs the Publish workflow, which publishes the package to npm with provenance through trusted publishing. The script requires a clean `main` that matches `origin/main`, a logged-in `gh`, and a version that isn't already on npm:
+Don't bump these by hand. The release script bumps all four, plus the template `STORY_REF` pins and the version examples in the docs, rebuilds the fallback, runs the CI checks, commits `chore: release X.Y.Z`, tags `vX.Y.Z`, pushes, and creates a GitHub release with generated notes. The tag push runs the Publish workflow, which publishes the package to npm with provenance through trusted publishing. The script requires a clean `main` that matches `origin/main`, a logged-in `gh`, and a version that isn't already on npm:
 
 ```shell
 bun run release patch            # or minor, major, or an explicit version like 1.2.0

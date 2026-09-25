@@ -77,33 +77,45 @@ The report model defaults to `openai/gpt-4o-mini` and may incur normal provider 
 
 These are individual local observations, not a benchmark or guaranteed latency. Live-site behavior, network conditions, login state, and the operations Jev selects can change the total time.
 
+## Reproducible benchmark
+
+v0.1.8 includes fixed Instagram, TikTok, and LinkedIn tasks plus a privacy-safe collector and p50/p95 summary generator. Once the runner initializes, every research attempt stays in the dataset, including access gates, interruptions, empty results, and failures. Exact task/environment groups—including the Jev Social runtime—remain `INCOMPLETE` until they contain at least ten distinct runs.
+
+No live benchmark results are published yet. The commands, row contract, timing definitions, and publication gate are documented in [benchmark/README.md](benchmark/README.md).
+
 ## Run it
 
-Node 20+, an OpenRouter key with Jev access, and a current [socai](https://github.com/socai-io/socai) CLI.
+Node 20+, a decision provider (OpenRouter Jev or a loopback Kev server), and a current [socai](https://github.com/socai-io/socai) CLI.
 
-Fastest path — no repository clone required. Onboarding prompts for the key and offers to install the official socai CLI when it is missing:
+Fastest OpenRouter path — no repository clone required. Onboarding prompts for the key and offers to install the official socai CLI when it is missing:
 
 ```bash
-npx github:socai-io/jev-social#v0.1.6 onboard
-npx github:socai-io/jev-social#v0.1.6
+npx github:socai-io/jev-social#v0.1.8 onboard
+npx github:socai-io/jev-social#v0.1.8
 ```
 
 To let Codex invoke the same browser-grounded workflow through GitHub CLI 2.101 or newer:
 
 ```bash
-gh skill install socai-io/jev-social jev-social@v0.1.6 --agent codex --scope user
+gh skill install socai-io/jev-social jev-social@v0.1.8 --agent codex --scope user
 ```
 
 Or install it from the [skills.sh directory](https://skills.sh/socai-io/jev-social/jev-social) with the cross-agent Skills CLI:
 
 ```bash
-npx skills add socai-io/jev-social --skill jev-social
+npx skills add https://github.com/socai-io/jev-social/tree/v0.1.8/skills/jev-social --skill jev-social
 ```
 
-For OpenCode, install the tested v0.1.6 skill into its natively discovered project skill directory:
+For OpenCode, install the tested v0.1.8 skill into its natively discovered project skill directory:
 
 ```bash
-npx skills add https://github.com/socai-io/jev-social/tree/v0.1.6/skills/jev-social --agent opencode --yes
+npx skills add https://github.com/socai-io/jev-social/tree/v0.1.8/skills/jev-social --agent opencode
+```
+
+For OpenClaw, install the v0.1.8 skill from its immutable release commit into the current workspace:
+
+```bash
+npx skills add https://github.com/socai-io/jev-social/tree/c411ae1532dd37ab94f8164f13552ed05f4c9ecc/skills/jev-social --skill jev-social --agent openclaw --copy
 ```
 
 The skill pins the documented Jev Social CLI release, preserves its read-only and login-gate boundaries, and returns source-linked evidence instead of raw run JSON. Platform availability is checked against the installed socai CLI before a run.
@@ -118,6 +130,26 @@ npm install
 cp .env.example .env   # OPENROUTER_API_KEY=…
 npm start
 ```
+
+To run v0.1.8 through local [Kev](https://github.com/jaredpalmer/kev), start its TypeSafe-compatible server on loopback, then launch the tagged Jev Social release without an OpenRouter key:
+
+```bash
+# Terminal 1
+git clone https://github.com/jaredpalmer/kev.git
+cd kev
+git checkout 2855ba2a55a80579176a459f78b95d03548cabb5
+uv sync --extra serve
+uv run --extra serve python -m kev.serve --run jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 --port 8009
+
+# Terminal 2
+export JEV_SOCIAL_SYSTEM_ONE_URL=http://127.0.0.1:8009/v1/systemone
+export JEV_SOCIAL_SYSTEM_ONE_MODEL=kev-latest
+export JEV_SOCIAL_SYSTEM_ONE_TIMEOUT_MS=120000
+export OPENROUTER_REPORT_MODEL=off
+npx github:socai-io/jev-social#v0.1.8
+```
+
+The local endpoint must be plain HTTP on `localhost`, `127.0.0.1`, or `::1`, with the exact `/v1/systemone` path. Jev Social does not send the OpenRouter key to it, rejects redirects and oversized responses, and keeps the same typed choice validation. Local inference allows up to 120 seconds by default; lower it with `JEV_SOCIAL_SYSTEM_ONE_TIMEOUT_MS`. `OPENROUTER_REPORT_MODEL=off` uses the deterministic source-linked report; the browser and social-platform traffic still runs through local `socai` and Chrome.
 
 Opens `http://127.0.0.1:8766`. Loopback only. Leave the platform on **Jev · auto**, type a goal, watch the timer.
 

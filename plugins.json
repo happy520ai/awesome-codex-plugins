@@ -3,7 +3,7 @@
   "name": "awesome-codex-plugins",
   "version": "1.0.0",
   "last_updated": "2026-09-25",
-  "total": 238,
+  "total": 239,
   "categories": [
     "Development & Workflow",
     "Tools & Integrations"
@@ -1158,6 +1158,16 @@
       "category": "Development & Workflow",
       "source": "awesome-codex-plugins",
       "install_url": "https://raw.githubusercontent.com/lennney/stop-that-shit/HEAD/.codex-plugin/plugin.json"
+    },
+    {
+      "name": "Supercov",
+      "url": "https://github.com/supercorp-ai/supercov",
+      "owner": "supercorp-ai",
+      "repo": "supercov",
+      "description": "Coverage, security and code quality for coding agents.",
+      "category": "Development & Workflow",
+      "source": "awesome-codex-plugins",
+      "install_url": "https://raw.githubusercontent.com/supercorp-ai/supercov/HEAD/plugins/supercov/.codex-plugin/plugin.json"
     },
     {
       "name": "Superloopy",

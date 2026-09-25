@@ -1708,6 +1708,21 @@
       "icon": "./plugins/lennney/stop-that-shit/assets/stop-icon.svg"
     },
     {
+      "name": "supercov",
+      "displayName": "Supercov",
+      "source": {
+        "source": "local",
+        "path": "./plugins/supercorp-ai/supercov"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development & Workflow",
+      "description": "Coverage, security and code quality for coding agents.",
+      "icon": "./plugins/supercorp-ai/supercov/assets/logo.png"
+    },
+    {
       "name": "superloopy",
       "displayName": "Superloopy",
       "source": {
