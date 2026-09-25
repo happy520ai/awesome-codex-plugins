@@ -779,15 +779,15 @@
       "displayName": "Designer Skill",
       "source": {
         "source": "local",
-        "path": "./plugins/Pythoughts-labs/designer-skill"
+        "path": "./plugins/PyModel/designer-skill"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
       "category": "Development & Workflow",
-      "description": "Plug-and-play MCP that gives your agent UI superpowers. One install: design skill + MCP server, zero config.",
-      "icon": "./plugins/Pythoughts-labs/designer-skill/assets/icon.webp"
+      "description": "Plug-and-play MCP that gives your coding agent UI superpowers: design references, intent routing and a static anti-slop gate, no API key.",
+      "icon": "./plugins/PyModel/designer-skill/assets/icon.webp"
     },
     {
       "name": "devin",
