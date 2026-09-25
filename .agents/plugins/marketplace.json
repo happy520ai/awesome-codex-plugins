@@ -3367,7 +3367,7 @@
         "authentication": "ON_INSTALL"
       },
       "category": "Tools & Integrations",
-      "description": "Self-hosted AI gateway for Codex with provider-free prompt enhancement, nine governed MCP tools, and a credential-free Docker path.",
+      "description": "Self-hosted AI gateway for Codex with provider-free prompt enhancement, fifteen governed MCP tools, and a credential-free Docker path.",
       "icon": "./plugins/happy520ai/unified-ai-system/assets/icon.png"
     },
     {

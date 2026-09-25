@@ -2284,7 +2284,7 @@
       "url": "https://github.com/happy520ai/unified-ai-system",
       "owner": "happy520ai",
       "repo": "unified-ai-system",
-      "description": "Self-hosted AI gateway for Codex with provider-free prompt enhancement, nine governed MCP tools, and a credential-free Docker path.",
+      "description": "Self-hosted AI gateway for Codex with provider-free prompt enhancement, fifteen governed MCP tools, and a credential-free Docker path.",
       "category": "Tools & Integrations",
       "source": "awesome-codex-plugins",
       "install_url": "https://raw.githubusercontent.com/happy520ai/unified-ai-system/HEAD/.codex-plugin/plugin.json"
