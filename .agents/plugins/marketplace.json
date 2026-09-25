@@ -849,21 +849,6 @@
       "icon": "./plugins/jquinteiroo/devrecap/assets/devrecap-icon.webp"
     },
     {
-      "name": "emulo",
-      "displayName": "Ditto",
-      "source": {
-        "source": "local",
-        "path": "./plugins/ohad6k/ditto"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Development & Workflow",
-      "description": "Mines selected evidence from local coding-agent sessions into private work, design, and writing profiles for Codex, Claude Code, and GitHub Copilot.",
-      "icon": "./plugins/ohad6k/ditto/assets/emulo.svg"
-    },
-    {
       "name": "docflow",
       "displayName": "Docflow",
       "source": {
@@ -892,6 +877,21 @@
       "category": "Development & Workflow",
       "description": "MCP server exposing reasoning, code, anti-deception, and memory harness tools for Codex.",
       "icon": "./plugins/ejentum/ejentum-mcp/assets/ejentum-icon.svg"
+    },
+    {
+      "name": "emulo",
+      "displayName": "Emulo",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ohad6k/emulo"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development & Workflow",
+      "description": "Mines selected evidence from local coding-agent sessions into private work, design, and writing profiles for Codex, Claude Code, and GitHub Copilot.",
+      "icon": "./plugins/ohad6k/emulo/assets/emulo.svg"
     },
     {
       "name": "epic",
@@ -3192,6 +3192,21 @@
       "category": "Tools & Integrations",
       "description": "Knowledge-backed SolidWorks design and validation workflows for Codex with standards lookup, CAD evidence gates, and consent-based session learning.",
       "icon": "./plugins/Erfouni/solidworks-GPT-plugin/assets/icon.svg"
+    },
+    {
+      "name": "story-skills",
+      "displayName": "Story Skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/danjdewhurst/story-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Tools & Integrations",
+      "description": "Fiction-writing skills for planning, drafting, and revising stories as markdown, with a dependency-free CLI that checks continuity: deaths, promise payoffs, open questions, and durable story state.",
+      "icon": "./plugins/danjdewhurst/story-skills/assets/logo.png"
     },
     {
       "name": "storyflo-codex-plugin",

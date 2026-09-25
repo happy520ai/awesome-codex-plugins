@@ -10,6 +10,8 @@
 [![release](https://img.shields.io/github/v/release/socai-io/jev-social?style=flat-square&label=release)](https://github.com/socai-io/jev-social/releases/latest)
 [![license](https://img.shields.io/github/license/socai-io/jev-social?style=flat-square&label=license)](LICENSE)
 
+<a href="https://ossdrop.com/tool/jev-social"><img src="https://ossdrop.com/badge/jev-social" alt="#1 Tool of the Day on OSSDrop" width="250" height="56"></a>
+
 Jev chooses each next operation: search, open a particular post or profile, read comments, explicitly requested TikTok media download, or finish. [socai](https://github.com/socai-io/socai) executes the selected CLI command in your real Chrome. Each result goes back to Jev before the next decision.
 
 <p>
@@ -61,7 +63,9 @@ This video also predates the per-operation Jev loop.
 
 Only commands exposed by the installed socai CLI are offered. Targets come from captured results or explicit URLs in the user's request. Unsupported, malformed, and low-confidence decisions do not execute. Previously attempted operations are removed from the next choice set.
 
-The run stores each choice, confidence, command, observed result summary, and elapsed time. Login/access gates, decision failures, and step limits produce partial results rather than a success claim. Reports are compiled from captured text, comments, and source links; they do not hand browsing off to another agent or depend on `socai research`. Speed varies with the number of chosen operations and the live site.
+The run stores each choice, confidence, command, observed result summary, and elapsed time. Login/access gates, decision failures, and step limits produce partial results rather than a success claim. After collection, Jev Social can use the existing OpenRouter key to synthesize a concise report from a bounded, sanitized evidence payload. Every accepted finding must cite a captured source; foreign URLs, missing citations, raw JSON, and local paths fail validation and fall back to the deterministic evidence report. Report sections stream into the fixed panel while captured cards stay visible, and the downloaded `report.md` is the same Markdown shown in the browser. The synthesizer has no browser or shell tools and does not depend on `socai research`.
+
+The report model defaults to `openai/gpt-4o-mini` and may incur normal provider usage. Set `OPENROUTER_REPORT_MODEL` to another available model, or set it to `off` to keep report generation fully deterministic. Speed varies with the number of chosen operations, the live site, and the selected report model.
 
 ## Recorded evidence
 
@@ -80,14 +84,14 @@ Node 20+, an OpenRouter key with Jev access, and a current [socai](https://githu
 Fastest path — no repository clone required. Onboarding prompts for the key and offers to install the official socai CLI when it is missing:
 
 ```bash
-npx github:socai-io/jev-social#v0.1.5 onboard
-npx github:socai-io/jev-social#v0.1.5
+npx github:socai-io/jev-social#v0.1.6 onboard
+npx github:socai-io/jev-social#v0.1.6
 ```
 
 To let Codex invoke the same browser-grounded workflow through GitHub CLI 2.101 or newer:
 
 ```bash
-gh skill install socai-io/jev-social jev-social@v0.1.5 --agent codex --scope user
+gh skill install socai-io/jev-social jev-social@v0.1.6 --agent codex --scope user
 ```
 
 Or install it from the [skills.sh directory](https://skills.sh/socai-io/jev-social/jev-social) with the cross-agent Skills CLI:
@@ -96,10 +100,10 @@ Or install it from the [skills.sh directory](https://skills.sh/socai-io/jev-soci
 npx skills add socai-io/jev-social --skill jev-social
 ```
 
-For OpenCode, install the tested v0.1.5 skill into its natively discovered project skill directory:
+For OpenCode, install the tested v0.1.6 skill into its natively discovered project skill directory:
 
 ```bash
-npx skills add https://github.com/socai-io/jev-social/tree/v0.1.5/skills/jev-social --agent opencode --yes
+npx skills add https://github.com/socai-io/jev-social/tree/v0.1.6/skills/jev-social --agent opencode --yes
 ```
 
 The skill pins the documented Jev Social CLI release, preserves its read-only and login-gate boundaries, and returns source-linked evidence instead of raw run JSON. Platform availability is checked against the installed socai CLI before a run.
