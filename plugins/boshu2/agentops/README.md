@@ -10,17 +10,19 @@ and get each change judged by a fresh agent session that didn't write it.**
 [![Validate](https://github.com/boshu2/agentops/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/boshu2/agentops/actions/workflows/validate.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/boshu2/agentops)](https://github.com/boshu2/agentops/releases/latest)
-[![Skills](https://img.shields.io/badge/skills-38-black.svg)](docs/SKILL-ROUTER.md)
+[![Skills](https://img.shields.io/badge/skills-catalog-black.svg)](docs/SKILL-ROUTER.md)
 
 [Install](#quickstart) · [The loop](#the-operational-loop) ·
 [Goals](#goals) · [Try it](#try-it) · [Skills](#skills-at-a-glance)
 
 </div>
 
-AgentOps is 38 optional skills and a CLI (`ao`) for AI coding agents such as
-Claude Code and Codex. You state intent as behavior in your domain's words. The
-skills carry it through one change (Plan → Implement → Validate, an **RPI**) or,
-for bigger work, a goal made of many RPIs tracked in
+AgentOps provides optional skills and a CLI (`ao`). The same `SKILL.md` skills work
+with coding agents (Claude Code, Codex, Cursor, OpenCode, Gemini CLI, Pi and
+others) and personal assistants (OpenClaw, Grok Bot). You state intent as
+behavior in your domain's words. The skills carry it through one change
+(Plan → Implement → Validate, an **RPI**) or, for bigger work, a goal made of
+many RPIs tracked in
 [Beads](https://github.com/gastownhall/beads), a dependency-aware issue tracker.
 
 <a id="why-these-skills-exist"></a>
@@ -34,14 +36,16 @@ for bigger work, a goal made of many RPIs tracked in
 | Says “done” after a green test run | A fresh judge that didn't write the change |
 | Loses the thread on work bigger than one session | A Beads graph holding intent, dependencies and verdicts |
 | Runs off with a half-formed goal | An interview that settles the goal before agents go autonomous |
+| Gives one model's answer to a hard call | A [council](skills/council/SKILL.md): judges in fresh contexts, each with the model, effort and perspective you assign (one model family or several vendors), compare, duel (score each other's ideas) or debate to your majority, keep dissent, and can answer an interview for you; [Idea Genie](skills/idea-genie/SKILL.md) brainstorms options |
+| Loses its plans, research and decisions when the session ends | Plans and decisions saved on the bead or issue (Plan, Interview, Navigate); research and idea reports under `.agents/`; council reports where you choose |
+| Repeats the last session's investigation | [Memory](skills/memory/SKILL.md) turns reviewed, disclosure-checked lessons into `.context/` pages safe to commit |
 
 <a id="install"></a>
 
 ## Quickstart
 
-Pick one install method so you don't get duplicate copies. Claude Code and Codex
-have managed plugins; other agents that read Agent Skills (`SKILL.md`) use the
-Skills installer or their own install path.
+Pick one method per agent: a plugin plus npx on the same agent gives you every
+skill twice.
 
 <details>
 <summary><strong>Claude Code</strong></summary>
@@ -76,20 +80,25 @@ custom roles and read limits have [separate setup](docs/install-day2-ops.md#inst
 </details>
 
 <details>
-<summary><strong>Cursor, Grok Bot, Gemini, Pi and other agents</strong></summary>
+<summary><strong>Everything else</strong> (Cursor, OpenCode, Gemini CLI, Pi, OpenClaw, Grok Bot)</summary>
 
-With Node.js installed, run from your project directory:
+<a id="everything-else"></a>
+
+With Node.js installed, run from your project directory, then pick your agents
+and skills:
 
 ```bash
 npx skills@latest add boshu2/agentops
 ```
 
-Choose your agent and the skills you want; add `-g` for a user-level install.
-For an agent the installer doesn't list, follow its Agent Skills instructions
-and the [source-link guide](docs/install-day2-ops.md#install-source-checkout).
-Confirm the agent lists and loads the selected skill. Some skills need extra
-tools ([install guide](docs/install-day2-ops.md)); what each host has been
-tested for is in [host coverage and limits](docs/contracts/multi-runtime-tier-charter.md#host-and-install-surface-mapping).
+Add `-g` for a user-level install. In scripts, name the agents:
+`npx skills@latest add boshu2/agentops -g -a cursor opencode -y`
+(`-y` without `-a` can install into every agent the installer knows).
+Installer targets include `cursor`, `opencode`, `gemini-cli`, `antigravity`,
+`pi`, `grok` (Grok Build) and `openclaw`. Grok Bot has no installer target; add
+the same `SKILL.md` folders through [its skill settings](https://docs.x.ai/grok-bot/skills-routines-and-automations).
+Some skills need extra tools ([install guide](docs/install-day2-ops.md)); what
+each host has been tested for is in [host coverage and limits](docs/contracts/multi-runtime-tier-charter.md#host-and-install-surface-mapping).
 
 </details>
 
@@ -259,7 +268,7 @@ Codex, or `/` and the installed Research entry in Cursor.
 
 ## Skills at a glance
 
-38 skills, all optional. Load one when it answers a specific question. Full
+All skills are optional. Load one when it answers a specific question. Full
 catalog: **[docs/SKILL-ROUTER.md](docs/SKILL-ROUTER.md)**.
 
 | Group | Skills | What it covers |
@@ -269,10 +278,9 @@ catalog: **[docs/SKILL-ROUTER.md](docs/SKILL-ROUTER.md)**.
 | Goals (experimental) | [`interview`](skills/interview/SKILL.md) [`craft-goal`](skills/craft-goal/SKILL.md) [`navigate`](skills/navigate/SKILL.md) | Shape, write and walk a goal over the bead graph |
 | Coordination | [`orchestrate`](skills/orchestrate/SKILL.md) [`agent-native`](skills/agent-native/SKILL.md) | Fresh workers per bead, disjoint scopes, integration |
 | On demand | [`research`](skills/research/SKILL.md) [`domain`](skills/domain/SKILL.md) [`test`](skills/test/SKILL.md) [`refactor`](skills/refactor/SKILL.md) [`review`](skills/review/SKILL.md) [`security`](skills/security/SKILL.md) [`doc`](skills/doc/SKILL.md) [`reverse-engineer`](skills/reverse-engineer/SKILL.md) | Reached for when a specific question comes up |
-| Learning | [`memory`](skills/memory/SKILL.md) [`cass`](skills/cass/SKILL.md) | Reviewed project context and past-session search |
-| Judgment strategies | [`council`](skills/council/SKILL.md) [`premortem`](skills/premortem/SKILL.md) [`postmortem`](skills/postmortem/SKILL.md) [`reality-check`](skills/reality-check/SKILL.md) [`idea-genie`](skills/idea-genie/SKILL.md) | Challenge, comparison and claim audits |
-| Runtimes and factories | [`codex-exec`](skills/codex-exec/SKILL.md) [`agy-native`](skills/agy-native/SKILL.md) [`ntm`](skills/ntm/SKILL.md) [`agent-mail`](skills/agent-mail/SKILL.md) [`using-gc`](skills/using-gc/SKILL.md) [`using-flywheel`](skills/using-flywheel/SKILL.md) | Selected executors, panes, mail and factories |
-| Guards and utilities | [`cc-hooks`](skills/cc-hooks/SKILL.md) [`dcg`](skills/dcg/SKILL.md) [`account-rotation`](skills/account-rotation/SKILL.md) [`rch`](skills/rch/SKILL.md) [`sbh`](skills/sbh/SKILL.md) [`ms`](skills/ms/SKILL.md) | Hooks, command guards, accounts, builds, disk, skill search |
+| Learning | [`memory`](skills/memory/SKILL.md) | Curated `.context/` pages safe to commit |
+| Judgment strategies | [`council`](skills/council/SKILL.md) [`premortem`](skills/premortem/SKILL.md) [`postmortem`](skills/postmortem/SKILL.md) [`reality-check`](skills/reality-check/SKILL.md) [`idea-genie`](skills/idea-genie/SKILL.md) | Multi-model councils (debates, idea duels, interview panels), idea brainstorms, plan challenges, postmortems and claim audits |
+| Runtimes and factories | [`codex-exec`](skills/codex-exec/SKILL.md) [`agy-native`](skills/agy-native/SKILL.md) [`using-gc`](skills/using-gc/SKILL.md) | Selected executors and Gas City integration |
 | Skill craft | [`skill-builder`](skills/skill-builder/SKILL.md) [`skill-eval`](skills/skill-eval/SKILL.md) | Author skills and measure whether they help |
 
 ## Where AgentOps fits
@@ -326,7 +334,7 @@ With Go installed: `go install github.com/boshu2/agentops/cli/cmd/ao@latest`.
 
 Version 3.8 retains existing 3.7 command and skill names. Use the
 [plugin update instructions](docs/install-day2-ops.md#install-and-update-runtime-plugins)
-or the [source and Skills installer guide](docs/install-day2-ops.md#update).
+or, for npx installs, `npx skills@latest update` ([update notes](docs/install-day2-ops.md#update)).
 For Homebrew: `brew update && brew upgrade agentops`. Start a new session
 afterward; new installs do not silently remove obsolete copies.
 
@@ -339,35 +347,25 @@ See the [3.8 release notes](docs/releases/2026-09-22-v3.8.0-notes.md) and
 </details>
 
 <details>
-<summary><strong>Source installs and skill dependencies</strong></summary>
+<summary><strong>Skill dependencies</strong></summary>
 
 <a id="other-installation-paths"></a>
 
-From an AgentOps checkout with `ao` installed:
-
-```bash
-ao skills link --skill test --skill refactor --dry-run
-ao skills link --skill test --skill refactor
-```
-
-Omit selectors for the whole catalog. Linking preserves existing real
-directories and foreign links. See [source setup and removal](docs/install-day2-ops.md#install-source-checkout).
 Skill installation does not install tool dependencies:
 
 | Skill | Needs | Why |
 |---|---|---|
 | `rpi` | `ao`, conditional | delegates exact-subject checks to Validate; only persists `verdict.v2` when requested, with the fixed-dispatch adapter optional |
 | `plan` | `ao`, conditional | runs `ao provenance snapshot-intent` with an explicit evidence root when the intent source is not durable |
+| `implement` | `ao`, conditional | at an integration boundary whose changed paths affect bound evidence, runs `ao provenance evidence-orphans` |
 | `validate` | `ao` | derives exact subject identity with the helper and uses `ao provenance store-verdict` when persistence is requested; Python/schema checks are developer-only |
 | `reality-check` | `ao`, conditional | inspect selected goal measurements with `ao goals` or evidence-store facts with `ao status` |
 | `using-gc` | `ao` | rig prep runs `ao gc prepare` and `ao gc check` |
 | `doc` | `ao`, optional | a requested continuity handoff may use `ao session handoff`/`rehydrate` |
 | `reverse-engineer` | `python3` | Phase 1's mechanical teardown runs `scripts/reverse_engineer.py` |
 | `skill-builder` | `python3`, conditional | Create mode's `build.sh` runs `scripts/generate-skill-mesh.py`; heal/check/audit modes are bash-only |
-| `ms` | `python3`, conditional, plus `ms` binary | the MCP-search fallback runs `python3 skills/ms/scripts/mcp-search.py`; the `ms` binary is required for CLI load, write, and admin operations |
 | `memory` | `python3`, conditional | a selected toil investigation can use the repository helper `scripts/toil-mining/recent_human.py` on cleared Codex sources |
 | `security` | `python3`, conditional | the composable suite and offline redteam surfaces run `security_suite.py` when that scan type is selected |
-| `cass` | `python3`, optional | `scripts/prompt_miner.py` mines repeated prompts; one of several selectable Scripts-table entries |
 
 </details>
 
@@ -393,12 +391,13 @@ that saved notes improve later work. See [Memory's storage rules](skills/memory/
 
 The Claude Code plugin includes PreToolUse guards for private tracker data in
 commits, manual provenance-ledger edits and installed-skill overwrites. Installing
-only `ao` does not add hooks; other paths can opt in through [CC Hooks](skills/cc-hooks/SKILL.md).
+only `ao` does not add hooks; other paths can opt in through the [native hook installer](scripts/install-policy-dispatch.sh).
 Read-budget guards, Codex roles and trusted Codex hooks have [separate setup](docs/install-day2-ops.md#install-and-update-runtime-plugins).
 
 Disable Claude's plugin with `/plugin disable agentops`. Remove it with
 `claude plugin uninstall agentops@agentops-marketplace`; for Codex, use
-`codex plugin remove agentops@agentops-marketplace`.
+`codex plugin remove agentops@agentops-marketplace`; for npx installs, use
+`npx skills@latest remove`.
 
 </details>
 
@@ -410,7 +409,7 @@ connects evidence while Git owns content, the tracker owns work and the coding
 runtime or selected factory owns execution. Your repository owns delivery.
 
 Native execution requires zero AgentOps skills. [RPI](skills/rpi/SKILL.md),
-[Gas City](skills/using-gc/SKILL.md) and [Agentic Coding Flywheel](skills/using-flywheel/SKILL.md)
+[Gas City](skills/using-gc/SKILL.md) and [Agentic Coding Flywheel](https://agent-flywheel.com)
 are optional; their completion reports do not replace independent review.
 
 On request, Validate can save `verdict.v2` with exact content, checked scope and
@@ -471,9 +470,37 @@ external storage, following each owner's access and retention rules.
 
 </details>
 
+## Recommended tools and skills
+
+These independent projects can extend your AgentOps setup. Get their tools and
+skills directly from their authors; they are not bundled with AgentOps.
+
+- **[Gas City](https://github.com/gastownhall/gascity)**, from the organization
+  behind [Beads](https://github.com/gastownhall/beads), provides the building
+  blocks for a software factory. AgentOps includes [Gas City guidance](skills/using-gc/SKILL.md)
+  and an [executor integration pack](packs/agentops-executor/pack.toml).
+- **[Agentic Coding Flywheel](https://agent-flywheel.com)** is Jeffrey Emanuel's
+  ([Dicklesworthstone](https://github.com/Dicklesworthstone)) ecosystem for
+  planning and coordinating coding agents. Follow his site for the tools,
+  methodology and upstream skills.
+- **[Destructive Command Guard (`dcg`)](https://github.com/Dicklesworthstone/destructive_command_guard)**
+  is a strong recommendation for checking agent shell commands and blocking
+  destructive operations covered by its rules.
+- **[Coding Agent Session Search (`cass`)](https://github.com/Dicklesworthstone/coding_agent_session_search)**
+  is a strong recommendation for indexing and searching session histories
+  across coding agents, including finding episodes worth mining for lessons.
+- **[Meta Skill (`ms`)](https://github.com/Dicklesworthstone/meta_skill)**
+  is a strong recommendation for finding, managing and building skills from
+  context, including CASS session mining. Review generated guidance before reuse.
+
+DCG, CASS and MS are Jeffrey Emanuel's projects. Their upstream documentation
+and distribution terms govern their tools and skills.
+
 ## Contributing
 
 Contributions are welcome: documentation fixes, reproducible bug reports,
-tests, CLI improvements and skills. Read the [contribution guide](docs/CONTRIBUTING.md).
+tests, CLI improvements and skills. Read the [contribution guide](docs/CONTRIBUTING.md);
+to work on skills from a checkout, link them with
+[`ao skills link`](docs/install-day2-ops.md#install-source-checkout).
 
 Licensed under [Apache-2.0](LICENSE).

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "awesome-codex-plugins",
   "version": "1.0.0",
-  "last_updated": "2026-09-25",
+  "last_updated": "2026-09-26",
   "total": 239,
   "categories": [
     "Development & Workflow",
@@ -588,6 +588,16 @@
       "category": "Development & Workflow",
       "source": "awesome-codex-plugins",
       "install_url": "https://raw.githubusercontent.com/MedAdemBHA/docflow/HEAD/.codex-plugin/plugin.json"
+    },
+    {
+      "name": "Dryforge",
+      "url": "https://github.com/prekuter/dryforge",
+      "owner": "prekuter",
+      "repo": "dryforge",
+      "description": "Bounded-autonomy plugin that asks only the decisions that belong to the user, builds nothing before the intent is approved, verifies with checks that actually ran, and keeps project decisions as plain Markdown across Codex, Claude Code, Grok Build, Copilot CLI, and Antigravity CLI.",
+      "category": "Development & Workflow",
+      "source": "awesome-codex-plugins",
+      "install_url": "https://raw.githubusercontent.com/prekuter/dryforge/HEAD/codex/plugin/.codex-plugin/plugin.json"
     },
     {
       "name": "ejentum-mcp",
@@ -1448,16 +1458,6 @@
       "category": "Tools & Integrations",
       "source": "awesome-codex-plugins",
       "install_url": "https://raw.githubusercontent.com/jerryfane/agentgram/HEAD/.codex-plugin/plugin.json"
-    },
-    {
-      "name": "AgentGuards",
-      "url": "https://github.com/alelaguard/agentguards-plugins",
-      "owner": "alelaguard",
-      "repo": "agentguards-plugins",
-      "description": "LLM security guardrails for Codex with enforcing hooks and MCP tools: jailbreak and prompt-injection detection, web-content scanning, data-exfiltration blocking, and destructive-command authorization.",
-      "category": "Tools & Integrations",
-      "source": "awesome-codex-plugins",
-      "install_url": "https://raw.githubusercontent.com/alelaguard/agentguards-plugins/HEAD/codex/.codex-plugin/plugin.json"
     },
     {
       "name": "Aient",

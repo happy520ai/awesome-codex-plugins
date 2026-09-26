@@ -95,9 +95,13 @@ told Kael` the line is Sera's, and `said Kael` gives it to Kael. With no
 speech-verb tag, a paragraph whose narration names exactly one character
 (an action beat) gives the line to that character. Names and aliases match
 case-sensitively as proper nouns, and titles are skipped for the given
-name (`Lord Maren` also matches `Maren`). Pronoun tags (`she said`) are
-never attributed, so in close third person the POV character is often
-under-counted; when that matters, name the tags in a sample chapter and
+name (`Lord Maren` also matches `Maren`). Pronoun tags (`she said`,
+`said he`) are never attributed, and a paragraph with one is left
+unattributed even when its narration names another character. Only a
+pronoun and verb right after a closing quote or right before an opening
+one count as a tag; `She said nothing more` elsewhere is narration and
+does not block an action beat. In close third person the POV character
+is often under-counted; when that matters, name the tags in a sample chapter and
 rerun. Per character it reports lines, words, mean sentence length,
 contraction, question, and exclamation rates, and signature words used
 more by them than by others. It warns when a character says one of their

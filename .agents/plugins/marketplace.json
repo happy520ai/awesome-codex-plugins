@@ -864,6 +864,20 @@
       "icon": "./plugins/MedAdemBHA/docflow/assets/icon.svg"
     },
     {
+      "name": "dryforge",
+      "displayName": "Dryforge",
+      "source": {
+        "source": "local",
+        "path": "./plugins/prekuter/dryforge"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development & Workflow",
+      "description": "Bounded-autonomy plugin that asks only the decisions that belong to the user, builds nothing before the intent is approved, verifies with checks that actually ran, and keeps project decisions as plain Markdown across Codex, Claude Code, Grok Build, Copilot CLI, and Antigravity CLI."
+    },
+    {
       "name": "ejentum",
       "displayName": "ejentum-mcp",
       "source": {
@@ -2133,21 +2147,6 @@
       "category": "Tools & Integrations",
       "description": "Send explicit Telegram messages from Codex and local AI agents through a Telegram bot token and chat id.",
       "icon": "./plugins/jerryfane/agentgram/assets/agentgram-logo.svg"
-    },
-    {
-      "name": "agentguards-codex",
-      "displayName": "AgentGuards",
-      "source": {
-        "source": "local",
-        "path": "./plugins/alelaguard/agentguards-plugins"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Tools & Integrations",
-      "description": "LLM security guardrails for Codex with enforcing hooks and MCP tools: jailbreak and prompt-injection detection, web-content scanning, data-exfiltration blocking, and destructive-command authorization.",
-      "icon": "./plugins/alelaguard/agentguards-plugins/assets/logo.png"
     },
     {
       "name": "aient",

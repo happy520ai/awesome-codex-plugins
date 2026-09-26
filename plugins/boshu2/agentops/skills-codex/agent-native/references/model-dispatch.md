@@ -67,7 +67,7 @@ must still remain distinguishable. Never infer parentage from workspace,
 filename, title or proximity. An unavailable startup/recording operation stays
 a named failure with unknown identity, not a fabricated successful launch.
 
-[Session associations](../../cass/references/SESSION_FORMATS.md#work-to-session-associations)
+[Session associations](session-associations.md#work-to-session-associations)
 owns the fact distinctions: provenance, permitted locators, source bounds and
 multi-work spans. Record only metadata authorized for the source owner and
 recipient/destination; BD/Dolt is versioned, not secret storage. Neither this
@@ -149,9 +149,8 @@ unbounded shell recipe. Before starting it, the native runtime must:
 
 The selected native runtime retains process, timeout and output control. AO
 does not become a scheduler or semantic workflow engine. This non-executable
-reference does not change
-Door9's policy for tracked executable code or production Go, introduce a
-shipped runner, or relax specialist provider-name guards.
+reference does not introduce a shipped runner or relax specialist
+provider-name guards.
 
 ## Receipts and judgment
 

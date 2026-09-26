@@ -1,6 +1,6 @@
 ---
 name: character-management
-description: This skill should be used when the user asks to "create a character", "update a character", "add a character", "build a family tree", "character relationships", "character timeline", "character arc", "character profile", "relationship graph", "name a character", or needs to manage characters in a story project. NOT for character voices or dialogue style (use voice-style).
+description: This skill should be used when the user asks to "create a character", "update a character", "add a character", "build a family tree", "character relationships", "character timeline", "character arc", "character profile", "relationship graph", "name a character", or needs to manage characters in a story project. NOT for character voices or dialogue style (use voice-style), or for a thematic arc's lie, truth, and arc type (use theme-craft).
 ---
 
 # Character Management
@@ -47,6 +47,18 @@ story validate .
 4. If relationships changed, update the other character's file (bidirectional)
 5. Update `characters/_index.md` if role or status changed
 6. When CLI access is available, run `story reindex .`, `story links .`, and `story validate .`
+
+## Renaming or Killing Off a Character
+
+To rename, run `story rename character {id} "{New Name}"`. It sets `name`, renames the file when the id changes, and rewrites the id in every frontmatter field and markdown link target. Prose and hand-written registry sections (such as Family Trees in `characters/_index.md`) keep the old display name: search for it (`grep -rn "Old Name" .`) and update each hit by hand, including chapter text and link labels.
+
+To kill a character off:
+
+1. Set `status: deceased` and `died-in: chapter-NN` in the character file
+2. In every later chapter and scene, move the id from `characters` (and `pov`) to `mentions` where they appear only in memory, letters, or flashback
+3. Run `story continuity .`: it reports any later chapter or scene that still lists them in its cast
+
+After either change, run `story reindex .`, `story links .`, and `story validate .`.
 
 ## Managing Relationships
 
